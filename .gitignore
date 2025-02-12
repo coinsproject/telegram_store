@@ -1,2 +1,5 @@
 node_modules/
 venv/
+uploads/
+store.db
+ables.orders
