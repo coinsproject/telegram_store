@@ -1,10 +1,13 @@
 import os
 import logging
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends 
 from fastapi.staticfiles import StaticFiles  # ✅ Подключаем раздачу статики
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import Base, engine
 from app.routes import user, product, order, cart, payment, lucky_spin
+from pydantic import BaseModel
+from database import get_user_data
+
 
 # ✅ Директория загрузки изображений
 UPLOAD_DIR = "uploads"
@@ -15,6 +18,17 @@ logging.basicConfig(level=logging.DEBUG)
 
 # ✅ Создание базы данных
 Base.metadata.create_all(bind=engine)
+
+app = FastAPI()
+
+class UserProfileResponse(BaseModel):
+    balance: int
+    orders: list[dict]
+
+app.get("/user/profile", response_model=UserProfileResponse)
+def get_profile(user_id: int = 1):  # ⚠ Временное решение, user_id будет приходить из JWT
+    user_data = get_user_data(user_id)
+    return user_data
 
 # ✅ Запуск FastAPI
 app = FastAPI()
