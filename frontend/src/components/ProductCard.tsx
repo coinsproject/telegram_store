@@ -1,21 +1,21 @@
+// frontend/src/components/ProductCard.tsx
 import React from 'react';
+import { Product } from '../types/Product';
 import './ProductCard.css';
 
 interface ProductCardProps {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    imageUrl: string;
+    product: Product;
+    addToCart: (product: Product) => void;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ name, description, price, imageUrl }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart }) => {
     return (
         <div className="product-card">
-            <img src={imageUrl} alt={name} className="product-image" />
-            <h2 className="product-name">{name}</h2>
-            <p className="product-description">{description}</p>
-            <p className="product-price">{price} руб.</p>
+            <img src={product.image_url} alt={product.name} className="product-image" />
+            <h2 className="product-name">{product.name}</h2>
+            <p className="product-description">{product.description}</p>
+            <p className="product-price">{product.price} руб.</p>
+            <button onClick={() => addToCart(product)}>Добавить в корзину</button>
         </div>
     );
 };
