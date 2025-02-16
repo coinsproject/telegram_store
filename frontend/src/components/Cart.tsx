@@ -1,35 +1,47 @@
-import { Link } from "react-router-dom";
+import React from "react";
 
 interface CartItem {
     id: number;
     name: string;
+    brand: string;
+    volume: string;
     price: number;
+    image_url: string;
     quantity: number;
 }
 
 interface CartProps {
     cart: CartItem[];
-    removeFromCart: (id: number) => void;
+    setCart: React.Dispatch<React.SetStateAction<CartItem[]>>;
 }
 
-function Cart({ cart, removeFromCart }: CartProps) {
+const Cart: React.FC<CartProps> = ({ cart, setCart }) => {
+    // Удаление товара из корзины
+    const removeFromCart = (id: number) => {
+        setCart(cart.filter((item) => item.id !== id));
+    };
+
+    // Очистка всей корзины
+    const clearCart = () => {
+        setCart([]);
+    };
+
     return (
-        <div className="min-h-screen bg-gray-100 text-gray-900 flex flex-col items-center p-4">
-            <h1 className="text-2xl font-bold mb-4">🛒 Корзина</h1>
+        <div>
+            <h1>Корзина</h1>
             {cart.length === 0 ? <p>Корзина пуста</p> : (
-                <div>
+                <ul>
                     {cart.map((item) => (
-                        <div key={item.id} className="p-4 shadow-md flex justify-between">
-                            <p>{item.name} ({item.quantity} шт.)</p>
-                            <p>{item.price * item.quantity} ₽</p>
-                            <button onClick={() => removeFromCart(item.id)} className="bg-red-500 text-white p-2 rounded">❌</button>
-                        </div>
+                        <li key={item.id}>
+                            {item.name} - {item.brand} - {item.volume} мл - {item.price} руб. x {item.quantity}
+                            <button onClick={() => removeFromCart(item.id)}>Удалить</button>
+                        </li>
                     ))}
-                </div>
+                </ul>
             )}
-            <Link to="/" className="bg-gray-500 text-white p-2 rounded mt-4">🏠 Главная</Link>
+            {cart.length > 0 && <button onClick={clearCart}>Очистить корзину</button>}
         </div>
     );
-}
+};
 
 export default Cart;

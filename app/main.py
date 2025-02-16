@@ -19,16 +19,6 @@ logging.basicConfig(level=logging.DEBUG)
 # ✅ Создание базы данных
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
-
-class UserProfileResponse(BaseModel):
-    balance: int
-    orders: list[dict]
-
-app.get("/user/profile", response_model=UserProfileResponse)
-def get_profile(user_id: int = 1):  # ⚠ Временное решение, user_id будет приходить из JWT
-    user_data = get_user_data(user_id)
-    return user_data
 
 # ✅ Запуск FastAPI
 app = FastAPI()
