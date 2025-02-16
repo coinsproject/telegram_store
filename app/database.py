@@ -14,3 +14,11 @@ def get_db():
         yield db
     finally:
         db.close()
+        
+def get_user_data(user_id: int):
+    db = SessionLocal()
+    try:
+        # Предполагается, что у вас есть модель User
+        return db.query(User).filter(User.id == user_id).first()
+    finally:
+        db.close()

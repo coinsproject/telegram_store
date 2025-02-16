@@ -31,7 +31,7 @@ const ProductPage: React.FC<ProductPageProps> = ({ addToCart }) => {
     return (
         <div>
             <h1>{product.name}</h1>
-            <img src={product.image_url} alt={product.name} width="200" />
+            <img src={`http://127.0.0.1:8000${product.image_url}`} alt={product.name} />
             <p><strong>Бренд:</strong> {product.brand}</p>
             <p><strong>Объем:</strong> {product.volume} мл</p>
             <p><strong>Цена:</strong> {product.price} руб.</p>

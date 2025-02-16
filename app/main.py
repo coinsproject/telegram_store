@@ -6,7 +6,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.database import Base, engine
 from app.routes import user, product, order, cart, payment, lucky_spin
 from pydantic import BaseModel
-from database import get_user_data
+from .database import get_db
+
+
 
 
 # ✅ Директория загрузки изображений
@@ -42,6 +44,7 @@ app.include_router(lucky_spin.router)
 
 # ✅ Раздача загруженных изображений (исправляем путь!)
 app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
+
 
 @app.get("/")
 def home():
