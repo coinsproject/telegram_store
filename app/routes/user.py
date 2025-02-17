@@ -1,26 +1,10 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
-from pydantic import BaseModel
+# app/routes/user.py
+from app.models import User  # ✅ Теперь User импортируется из models.py
 from app.database import get_db
-from app.models.user import User
+from fastapi import APIRouter, Depends
 
-router = APIRouter(prefix="/users", tags=["Users"])
+router = APIRouter()
 
-# Схема для валидации входных данных
-class UserCreate(BaseModel):
-    name: str
-
-@router.post("/")
-def create_user(user: UserCreate, db: Session = Depends(get_db)):
-    new_user = User(name=user.name)
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
-    return new_user
-
-@router.get("/{user_id}")
-def get_user(user_id: int, db: Session = Depends(get_db)):
-    user = db.query(User).filter(User.id == user_id).first()
-    if not user:
-        raise HTTPException(status_code=404, detail="User not found")
-    return user
+@router.get("/users/{user_id}")
+def get_user(user_id: int, db=Depends(get_db)):
+    return db.query(User).filter(User.id == user_id).first()

@@ -1,6 +1,6 @@
 // frontend/src/pages/Cart.tsx
-import React from 'react';
-import { CartItem } from '../types/CartItem';
+import React from "react";
+import { CartItem } from "../types/CartItem";
 
 interface CartProps {
     cart: CartItem[];

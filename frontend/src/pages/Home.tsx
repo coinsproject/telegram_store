@@ -1,8 +1,8 @@
 // frontend/src/pages/Home.tsx
-import React from 'react';
-import ProductCard from '../components/ProductCard';
-import { Product } from '../types/Product';
-import './Home.css';
+import React from "react";
+import ProductCard from "../components/ProductCard";
+import { Product } from "../types/Product";
+import "./Home.css";
 
 interface HomeProps {
     products: Product[];
@@ -13,11 +13,8 @@ const Home: React.FC<HomeProps> = ({ products, addToCart }) => {
     return (
         <div className="product-list">
             {products.map((product) => (
-                <ProductCard
-                    key={product.id}
-                    product={product}
-                    addToCart={addToCart}
-                />
+                <ProductCard key={product.id} product={product} addToCart={addToCart} />
+                // ✅ Передаем addToCart
             ))}
         </div>
     );

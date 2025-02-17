@@ -1,11 +1,11 @@
 // frontend/src/components/ProductCard.tsx
-import React from 'react';
-import { Product } from '../types/Product';
-import './ProductCard.css';
+import React from "react";
+import { Product } from "../types/Product";
+import "./ProductCard.css";
 
 interface ProductCardProps {
     product: Product;
-    addToCart: (product: Product) => void;
+    addToCart: (product: Product) => void; // ✅ Указываем addToCart как обязательный
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart }) => {
@@ -16,6 +16,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, addToCart }) => {
             <p className="product-description">{product.description}</p>
             <p className="product-price">{product.price} руб.</p>
             <button onClick={() => addToCart(product)}>Добавить в корзину</button>
+      // ✅ Теперь кнопка работает
         </div>
     );
 };

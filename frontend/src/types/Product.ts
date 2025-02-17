@@ -2,7 +2,9 @@
 export interface Product {
     id: number;
     name: string;
-    description: string;
+    brand: string;
+    volume: string;
+    description: string;  // ✅ Добавлено
     price: number;
     image_url: string;
 }
