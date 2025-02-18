@@ -2,8 +2,8 @@ import random
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import get_db
-from app.models.lucky_spin import LuckySpin
-from app.models.user import User
+from app.models import LuckySpin
+from app.models import User
 from pydantic import BaseModel
 
 router = APIRouter(prefix="/lucky_spin", tags=["Lucky Spin"])

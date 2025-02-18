@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import get_db
-from app.models.order import Order
+from app.models import Order
 from pydantic import BaseModel
 
 router = APIRouter(prefix="/payments", tags=["Payments"])

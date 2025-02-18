@@ -1,14 +1,14 @@
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 from app.database import get_db
-from app.models.order import Order, OrderItem
-from app.models.product import Product
+from app.models import Order, OrderItem, Product  # ✅ Теперь импорт корректный
 from pydantic import BaseModel
 
 router = APIRouter(prefix="/orders", tags=["Orders"])
 
-# ✅ Схема для оформления заказа
+# ✅ Схемы для Pydantic
 class OrderItemCreate(BaseModel):
     product_id: int
     quantity: int
